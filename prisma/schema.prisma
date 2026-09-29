@@ -1,0 +1,238 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Office Bearers - main positions
+model OfficeBearer {
+  id            Int      @id @default(autoincrement())
+  designation   String
+  name          String
+  mobile        String?
+  photo         String?
+  email         String?
+  displayOrder  Int      @default(0)
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("office_bearers")
+}
+
+// Media Prabhari - separate from main office bearers
+model MediaContact {
+  id            Int      @id @default(autoincrement())
+  designation   String   @default("मीडिया प्रभारी")
+  name          String
+  mobile        String?
+  email         String?
+  whatsapp      String?
+  verified      Boolean  @default(false)
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("media_contacts")
+}
+
+// Notices
+model Notice {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  date        DateTime  @default(now())
+  description String?
+  content     String?
+  important   Boolean   @default(false)
+  published   Boolean   @default(true)
+  pdfUrl      String?
+  views       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("notices")
+}
+
+// News
+model News {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  image       String?
+  excerpt     String?
+  content     String?
+  category    String?
+  date        DateTime  @default(now())
+  featured    Boolean   @default(false)
+  published   Boolean   @default(true)
+  views       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("news")
+}
+
+// Documents/Letters/Orders
+model Document {
+  id            Int       @id @default(autoincrement())
+  title         String
+  slug          String    @unique
+  letterNumber  String?
+  category      String?
+  date          DateTime  @default(now())
+  description   String?
+  fileUrl       String?
+  published     Boolean   @default(true)
+  downloads     Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("documents")
+}
+
+// Events
+model Event {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  date        DateTime
+  endTime     DateTime?
+  venue       String?
+  description String?
+  image       String?
+  status      String    @default("upcoming") // upcoming, ongoing, completed, cancelled
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("events")
+}
+
+// Photo Gallery Albums
+model GalleryAlbum {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  event       String?
+  date        DateTime  @default(now())
+  description String?
+  coverImage  String?
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  images      GalleryImage[]
+
+  @@map("gallery_albums")
+}
+
+// Gallery Images
+model GalleryImage {
+  id          Int       @id @default(autoincrement())
+  albumId     Int
+  caption     String?
+  imageUrl    String
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+
+  album       GalleryAlbum @relation(fields: [albumId], references: [id])
+
+  @@map("gallery_images")
+}
+
+// Videos
+model Video {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  thumbnail   String?
+  videoUrl    String?
+  youtubeId   String?
+  description String?
+  date        DateTime  @default(now())
+  duration    Int?
+  published   Boolean   @default(true)
+  views       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("videos")
+}
+
+// Downloads
+model Download {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  category    String?
+  description String?
+  fileUrl     String
+  fileSize    Int?
+  fileType    String?
+  date        DateTime  @default(now())
+  downloads   Int       @default(0)
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("downloads")
+}
+
+// Important Links
+model ImportantLink {
+  id          Int       @id @default(autoincrement())
+  title       String
+  url         String
+  description String?
+  category    String?
+  order       Int       @default(0)
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("important_links")
+}
+
+// Site Settings
+model SiteSetting {
+  id          Int      @id @default(autoincrement())
+  key        String   @unique
+  value      String
+  type       String   @default("text") // text, html, json
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+// Contact Messages
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contact_messages")
+}
+
+// Admin Users
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String
+  role      String   @default("admin")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admin_users")
+}
