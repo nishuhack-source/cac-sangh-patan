@@ -2,12 +2,14 @@ import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-// Data - NO Secretary, Media separate
+// Data - Secretary present, Media separate
 const bearers = [
-  { id: 1, designation: 'संरक्षक', name: 'विकासखण्ड शिक्षा अधिकारी, पाटन', icon: '🏛️' },
-  { id: 2, designation: 'ब्लॉक अध्यक्ष', name: 'श्री महेंद्र बहादुर', mobile: '9039790762', icon: '👤' },
-  { id: 3, designation: 'उपाध्यक्ष', name: 'श्री अशोक सिन्हा', mobile: '8959597693', icon: '👤' },
-  { id: 4, designation: 'कोषाध्यक्ष', name: 'श्री हरिशंकर दर्शनी', mobile: '9755036159', icon: '👤' },
+  { id: 1, designation: 'संरक्षक', name: 'विकासखंड शिक्षा अधिकारी, पाटन', icon: '🏛️' },
+  { id: 2, designation: 'ब्लॉक अध्यक्ष', name: 'श्री महेंद्र बहादुर', icon: '👤' },
+  { id: 3, designation: 'उपाध्यक्ष', name: 'श्री अशोक सिन्हा', icon: '👤' },
+  { id: 4, designation: 'सचिव', name: 'श्री टिकेश्वर गजपाल', icon: '👤' },
+  { id: 5, designation: 'सहसचिव', name: 'श्रीमती योगिता साहू', icon: '👤' },
+  { id: 6, designation: 'कोषाध्यक्ष', name: 'श्री हरिशंकर देवांगन', icon: '👤' },
 ];
 
 const quickActions = [
@@ -33,6 +35,9 @@ const notices = [
 ];
 
 const mediaPrabhari = { name: 'नितेश कुमार साहू', mobile: '8120397425' };
+
+// Note: Phone numbers intentionally not displayed for office bearers on homepage.
+// Contact details available through media prabhari or contact page.
 
 export default function HomePage() {
   return (
@@ -125,18 +130,13 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-bold text-gray-900 text-lg mb-1">{b.designation}</h3>
                   <p className="text-gray-600 text-sm mb-3">{b.name}</p>
-                  {b.mobile && (
-                    <a href={`tel:${b.mobile}`} className="btn btn-secondary text-xs py-2 px-4">
-                      📞 {b.mobile}
-                    </a>
-                  )}
                 </div>
               </div>
             ))}
           </div>
 
           <p className="text-center text-gray-500 text-sm mt-6">
-            ℹ️ सचिव का पद वर्तमान में रिक्त है।
+            ℹ️ विस्तृत सूची के लिए पदाधिकारी पृष्ठ देखें।
           </p>
         </div>
       </section>

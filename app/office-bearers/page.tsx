@@ -25,16 +25,16 @@ const officeBearers = [
   },
   { 
     id: 4, 
-    designation: 'सहसचिव', 
-    name: 'श्रीमती योगिता साहू',
-    role: 'सहायता एवं दस्तावेजीकरण',
+    designation: 'सचिव', 
+    name: 'श्री टिकेश्वर गजपाल',
+    role: 'सचिवीय कार्य',
     gradient: 'from-navy-900 to-gold-500'
   },
   { 
     id: 5, 
-    designation: 'सेकर9c', 
-    name: 'श्री टिकेश्वर गजपाल',
-    role: 'सचिवीय कार्य',
+    designation: 'सहसचिव', 
+    name: 'श्रीमती योगिता साहू',
+    role: 'सहायता एवं दस्तावेजीकरण',
     gradient: 'from-navy-900 to-gold-500'
   },
   { 
@@ -105,25 +105,6 @@ export default function OfficeBearersPage() {
                     <h3 className="text-lg font-semibold text-gray-900">{bearer.name}</h3>
                     <p className="text-gray-500 text-sm mt-1">{bearer.role}</p>
                   </div>
-                  {/* Contact Actions */}
-                  {bearer.mobile && (
-                    <div className="flex gap-3 mt-6">
-                      <a 
-                        href={`tel:${bearer.mobile.replace(/\s/g, '')}`}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 hover:bg-gold-50 rounded-xl text-sm font-semibold text-gray-700 hover:text-gold-700 transition-all"
-                      >
-                        📞 कॉल करें
-                      </a>
-                      <a 
-                        href={`https://wa.me/${bearer.whatsapp}`}
-                        target="_blank"
-                        rel="noopener"
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-green-500 hover:bg-green-600 rounded-xl text-sm font-semibold text-white transition-all"
-                      >
-                        💬 WhatsApp
-                      </a>
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
