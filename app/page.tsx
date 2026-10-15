@@ -121,7 +121,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {bearers.map((b, i) => (
+            {bearers.map((b) => (
               <div key={b.id} className="bearer-card">
                 <div className="bearer-card-header" />
                 <div className="p-5 text-center">
