@@ -2,22 +2,16 @@ name = "cac-sangh-patan"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
-# For Cloudflare Pages with Functions
-[site]
-bucket = ".vercel/output/static"
+# Required for Pages deployment
+pages_build_output_dir = ".next"
 
-# D1 Database binding
-[[d1_databases]]
-binding = "DB"
-database_name = "cac-sangh-patan-db"
-database_id = "preview-database-id" # Will be replaced with actual ID after wrangler d1 create
+# D1 Database binding (create with: wrangler d1 create cac-sangh-patan-db)
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "cac-sangh-patan-db"
+# database_id = "will-be-created"
 
-# R2 bucket for file uploads (images, documents)
-[[r2_buckets]]
-binding = "STORAGE"
-bucket_name = "cac-sangh-patan-uploads"
-
-# Environment variables (secrets should be set via Cloudflare dashboard)
-[vars]
-JWT_SECRET = "change-me-in-production"
-ADMIN_EMAIL = "admin@cacsanghpatan.org"
+# R2 bucket for file uploads (create with: wrangler r2 bucket create cac-sangh-patan-uploads)
+# [[r2_buckets]]
+# binding = "STORAGE"
+# bucket_name = "cac-sangh-patan-uploads"
